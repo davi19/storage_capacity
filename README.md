@@ -1,6 +1,6 @@
 # Storage Capacity
 
-Package create for facility get space of storage in Android and IOS
+Package created to facilitate the manipulation of storage space on Android and IOS. Informing the space available for use, the space occupied, the total storage space, conversion facilities to MB and GB. And ease to discover the device's GB capacity
 
 
 
