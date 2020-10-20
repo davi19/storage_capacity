@@ -1,5 +1,6 @@
 import Flutter
 import UIKit
+import Foundation
 
 public class SwiftStorageCapacityPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -14,26 +15,35 @@ public class SwiftStorageCapacityPlugin: NSObject, FlutterPlugin {
                result("iOS " + UIDevice.current.systemVersion)
            }
             else if(call.method == "getFreeSpace"){
-                if let freeSpaceInBytes = FileManagerUility.getFileSize(for: .systemFreeSize) {
-                   result(freeSpaceInBytes)
-                }
-              }
-              else if(call.method == "getOccupiedSpace"){
- if let totalSpaceInBytes = FileManagerUility.getFileSize(for: .systemSize) {
-                 if let freeSpaceInBytes = FileManagerUility.getFileSize(for: .systemFreeSize) {
-                                    let bytesOccupied = totalSpaceInBytes - freeSpaceInBytes
-                                 }
+do
+        {
+            let attributes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
 
-                                }
-                result(bytesOccupied)
-              } else if(call.method == "getTotalSpace"){
-                 if let totalSpaceInBytes = FileManagerUility.getFileSize(for: .systemSize) {
-                                   result(totalSpaceInBytes)
-
-                                }
+            return result(attributes[FileAttributeKey.systemFreeSize] as! Int64)
+        }
+        catch
+        {
+            return result("")
+        }
               }
-              else {
-                result.notImplemented()
+                          else if(call.method == "getOccupiedSpace"){
+                            do{
+            let attributes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
+            let totalSpace = attributes[FileAttributeKey.systemSize] as! Int64
+            let attributesFree = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
+            let freeSpace = attributesFree[FileAttributeKey.systemFreeSize] as! Int64
+            return result(totalSpace-freeSpace)
+                            }catch {
+            return result("")
+        }
+              }
+                                        else if(call.method == "getTotalSpace"){
+do {
+            let attributes = try FileManager.default.attributesOfFileSystem(forPath: NSHomeDirectory())
+            return result(attributes[FileAttributeKey.systemSize] as! Int64)
+        } catch {
+            return result("")
+        }
               }
   }
 }

@@ -16,7 +16,6 @@ class StorageCapacity {
     return result;
   }
 
-// TODO Github PACKAGE ??
   static get getOccupiedSpace async {
     var result = await _channel.invokeMethod('getOccupiedSpace');
     return result;
@@ -48,7 +47,7 @@ class StorageCapacity {
         i = i - 1;
       } else if ((difference < 0 && difference > -4)) {
         changeCapacity = false;
-      } else if ((difference > 0 && difference < 4)) {
+      } else {
         changeCapacity = false;
       }
     }
