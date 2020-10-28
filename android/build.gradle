@@ -1,4 +1,4 @@
-group 'com.example.storage_capacity'
+group 'io.komus.storage_capacity'
 version '1.0-SNAPSHOT'
 
 buildscript {

@@ -1,4 +1,4 @@
-package com.example.storage_capacity
+package io.komus.storage_capacity
 
 import androidx.annotation.NonNull;
 
