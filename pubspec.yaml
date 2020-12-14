@@ -1,6 +1,6 @@
 name: storage_capacity
 description: A package facilitates the use of storage capacity. Taking free space, occupied space, total space and device capacity.
-version: 0.0.2
+version: 0.0.4
 homepage: https://komus.io/
 repository: https://github.com/davi19/storage_capacity
 
